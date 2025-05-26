@@ -5,6 +5,7 @@
 #include <bitset>
 #include <climits>
 #include <numeric>
+#include <functional>
 
 using namespace std;
 
