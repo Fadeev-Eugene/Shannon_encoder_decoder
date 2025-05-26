@@ -13,12 +13,10 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libgtest-dev cmake build-essential
+        sudo apt-get install -y libgtest-dev build-essential
+        sudo apt-get install -y cmake
 
-    - name: Build
+    - name: Build and test
       run: |
-        make shannon
-        make tests
-
-    - name: Run tests
-      run: make test
+        make all
+        make test
