@@ -9,20 +9,24 @@ BUILD_DIR := build
 SRC := $(SRC_DIR)/main.cpp $(SRC_DIR)/shannon_encoder.cpp $(SRC_DIR)/shannon_decoder.cpp
 TEST_SRC := $(TEST_DIR)/test_shannon.cpp $(SRC_DIR)/shannon_encoder.cpp $(SRC_DIR)/shannon_decoder.cpp
 
-.PHONY: all clean test
+.PHONY: all clean test shannon tests
 
-all: build/shannon build/shannon_tests
+all: shannon tests
 
-build/shannon: $(SRC)
+shannon: $(BUILD_DIR)/shannon
+
+tests: $(BUILD_DIR)/shannon_tests
+
+$(BUILD_DIR)/shannon: $(SRC)
 	@mkdir -p $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
-build/shannon_tests: $(TEST_SRC)
+$(BUILD_DIR)/shannon_tests: $(TEST_SRC)
 	@mkdir -p $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) $^ $(LDFLAGS) -o $@
 
-test: build/shannon_tests
-	@./build/shannon_tests
+test: $(BUILD_DIR)/shannon_tests
+	@./$(BUILD_DIR)/shannon_tests
 
 clean:
 	@rm -rf $(BUILD_DIR)
